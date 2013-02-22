@@ -3,7 +3,7 @@
 //02/21/13
 //
 //   This is a continuation of the last story about a customer who goes to purchase a mobile phone*
-//   I will be using the code from project 2 as a starting point.
+//   I will be using the code from project 2 as a starting point, and adding the new Methods and Propertys.
 
 
 //Variables
@@ -33,6 +33,7 @@ var customer = {
 			console.log("It looks like you recently got this phone, but lets see what we can do!");
 		}	
 	},
+	
 	//Array Method - return Array
 	completePhoneSelection : function(phoneSelection, chooseNumDevices){
 
@@ -126,17 +127,17 @@ var employee = {
 	},
 	
 	 
-	
+	//Function Method - show newest phones
 	addPhonesToChoices : function(carrier, phones){
 		
 		var carrier = customer.custCurrentCarrier;
 		var phones = employee.phones;
 		if(carrier == "Verizon Wireless"){
-			console.log("The newest phones are the" + phones.vzwPhones+".");
+			console.log("The newest phones are the" + phones.vzwPhones + ".");
 		}else if(carrier == "Sprint"){
-			console.log("The newest phones are the" + phones.sprintPhones+".");
+			console.log("The newest phones are the" + phones.sprintPhones + ".");
 		}else if(carrier == "ATT"){
-			console.log("The newest phones are the" + phones.attPhones+".");
+			console.log("The newest phones are the" + phones.attPhones + ".");
 		}
 		
 	}
