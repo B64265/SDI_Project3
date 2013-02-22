@@ -5,10 +5,11 @@
 //   This is a continuation of the last story about a customer who goes to purchase a mobile phone*
 //   I will be using the code from project 2 as a starting point.
 
-//Variables & Defined Objects
+//Defined Objects
 
 var customer = {
-	
+
+	phoneSelection : ["Galaxy S III", "RAZR HD", "iPhone 5", "Droid Incredible LTE"],
 	custFirstName : "Jenna",
 	custLastName : "Mike-Mayer",
 	custCurrentCarrier : "Verizon Wireless",
@@ -23,13 +24,13 @@ var customer = {
 			console.log("It looks like you recently got this phone, but lets see what we can do!");
 		}	
 	},
-	//Array Function - return Array
+	//Array Method - return Array
 	completePhoneSelection : function(phoneSelection, chooseNumDevices){
 
 		var chosenPhones = [];
 	
 	for(i = 0; i < chooseNumDevices; i++){
-		var currentSelection = phoneSelection[i];
+		var currentSelection = customer.phoneSelection[i];
 		chosenPhones.unshift(currentSelection);
 		
 		if(i > 0){
@@ -47,7 +48,12 @@ var customer = {
 	}
 	
 	return chosenPhones;
-}
+},
+	//Accessor Method - Get Customer's Name and return
+	getCustomerName : function(){
+	return customer.custFirstName + " " + customer.custLastName;
+	
+	}
 
 
 
@@ -56,6 +62,9 @@ var customer = {
 
 
 var employee = {
+
+	supportedCarriers : ["Verizon Wireless", "Sprint", "AT&T"],
+
 
 	//BOOL Method - return BOOL
 	 hasCustCarrier : function (supportedCarriers, custCurrentCarrier){
@@ -79,16 +88,22 @@ var employee = {
 		while(custInLine > 0){
 			console.log("There is " + custInLine +" customer(s) in line ahead of you.  We have "+ empToHelp +" employees to work through the line.");
 			custInLine--;
+			
+			for( x = 0; x < empToHelp ; x++ ){
+				custInLine--;
+				
+			}
+			
 		}
 		return custInLine;
 	},
 
-//String Function - return String
+	//String Method - return String
 	goodBye : function(custFirstName, custLastName){
 	
 		var empName = "Jeremy";
 	
-		var thankCustomer = "Thanks for coming in today " + custFirstName + " " + custLastName +"! My name is " + empName +" if you have any questions! What can I get for you?";
+		var thankCustomer = "Thanks for coming in today " + customer.getCustomerName() +"! My name is " + empName +" if you have any questions! What can I get for you?";
 	
 		return thankCustomer;
 	
@@ -96,13 +111,11 @@ var employee = {
 	
 	
 }
-
+//Variables
 var custInLine = 8;
 var monthsSinceUpgrade = 28;
-var phoneSelection = ["Galaxy S III", "RAZR HD", "iPhone 5", "Droid Incredible LTE"];
 var chooseNumDevices = 2;
 var custCurrentCarrier = customer.custCurrentCarrier;
-var supportedCarriers = ["Verizon Wireless", "Sprint", "AT&T"];
 var custFirstName = customer.custFirstName;
 var custLastName = customer.custLastName;
 
@@ -112,14 +125,18 @@ var custLastName = customer.custLastName;
 
 customer.recentlyUpgraded(monthsSinceUpgrade);
 
-console.log("It is " + employee.hasCustCarrier(supportedCarriers, custCurrentCarrier) + " that we carry " + custCurrentCarrier);
+console.log("It is " + employee.hasCustCarrier(employee.supportedCarriers, custCurrentCarrier) + " that we carry " + custCurrentCarrier);
 
-console.log("There are currently " + employee.customerLine(custInLine) + " people ahead of you in line!");
+if(employee.customerLine(custInLine) <= 0){
+
+	console.log("You are next in line!");
+
+	}else{console.log("There are currently " + employee.customerLine(custInLine) + " people ahead of you in line!");}
 
 console.log(employee.goodBye(custFirstName, custLastName));
 
-console.log ("You have chosen the " + customer.completePhoneSelection(phoneSelection, chooseNumDevices) + " today. I hope you enjoy those phones!");
+console.log ("You have chosen the " + customer.completePhoneSelection(employee.phoneSelection, chooseNumDevices) + " today. I hope you enjoy those phones!");
 
 
-console.log(customer.custFirstName + " " +customer.custLastName);
+console.log(customer.getCustomerName());
 
