@@ -5,11 +5,20 @@
 //   This is a continuation of the last story about a customer who goes to purchase a mobile phone*
 //   I will be using the code from project 2 as a starting point.
 
-//Defined Objects
 
+//Variables
+var custInLine = 8;
+var monthsSinceUpgrade = 28;
+
+
+//Defined Objects
 var customer = {
 
-	phoneSelection : ["Galaxy S III", "RAZR HD", "iPhone 5", "Droid Incredible LTE"],
+	// Number Property
+	chooseNumDevices : 2,
+	// Array Property
+	phoneSelection : [" Galaxy S III", " RAZR HD", " iPhone 5", " Droid Incredible LTE"],
+	// String Property
 	custFirstName : "Jenna",
 	custLastName : "Mike-Mayer",
 	custCurrentCarrier : "Verizon Wireless",
@@ -63,6 +72,13 @@ var customer = {
 
 var employee = {
 
+	//Object
+	phones : {
+		 attPhones : [" HTC One X", " Galaxy Note II"],
+		 sprintPhones : [" Evo 4G LTE", " LG Optimus G"],
+		 vzwPhones : [" Droid RAZR MAXX", " Droid DNA"],
+		
+	},
 	supportedCarriers : ["Verizon Wireless", "Sprint", "AT&T"],
 
 
@@ -109,12 +125,26 @@ var employee = {
 	
 	},
 	
+	 
+	
+	addPhonesToChoices : function(carrier, phones){
+		
+		var carrier = customer.custCurrentCarrier;
+		var phones = employee.phones;
+		if(carrier == "Verizon Wireless"){
+			console.log("The newest phones are the" + phones.vzwPhones+".");
+		}else if(carrier == "Sprint"){
+			console.log("The newest phones are the" + phones.sprintPhones+".");
+		}else if(carrier == "ATT"){
+			console.log("The newest phones are the" + phones.attPhones+".");
+		}
+		
+	}
+	
 	
 }
-//Variables
-var custInLine = 8;
-var monthsSinceUpgrade = 28;
-var chooseNumDevices = 2;
+
+//Shortened Variables
 var custCurrentCarrier = customer.custCurrentCarrier;
 var custFirstName = customer.custFirstName;
 var custLastName = customer.custLastName;
@@ -122,21 +152,27 @@ var custLastName = customer.custLastName;
 
 
 
-
+//Find Upgrade Status
 customer.recentlyUpgraded(monthsSinceUpgrade);
 
+//Check whether carrier is supported
 console.log("It is " + employee.hasCustCarrier(employee.supportedCarriers, custCurrentCarrier) + " that we carry " + custCurrentCarrier);
 
+//loop through the line to help customers
 if(employee.customerLine(custInLine) <= 0){
 
 	console.log("You are next in line!");
 
 	}else{console.log("There are currently " + employee.customerLine(custInLine) + " people ahead of you in line!");}
 
+//Thank for their purchase agreement to purchase
 console.log(employee.goodBye(custFirstName, custLastName));
 
-console.log ("You have chosen the " + customer.completePhoneSelection(employee.phoneSelection, chooseNumDevices) + " today. I hope you enjoy those phones!");
+//Object Method - Add additional choices
+employee.addPhonesToChoices(customer.custCurrentCarrier, employee.phones);
+
+//Re-Explain the purchased devices + close out the sale.
+console.log ("You have chosen the " + customer.completePhoneSelection(employee.phoneSelection, customer.chooseNumDevices) + " today. I hope you enjoy those phones!");
 
 
-console.log(customer.getCustomerName());
 
